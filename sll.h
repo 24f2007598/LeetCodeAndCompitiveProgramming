@@ -110,11 +110,13 @@ void PriorityQueue::heapSort() {
 }
 
 //class definition for SLL
-class ListNode {
+class List {
     private:
+    struct ListNode {
         int data;
         struct ListNode *next;
-        struct ListNode *head;        
+    }; 
+    ListNode* head;      
     
     public:
         void insert_beginning(int);
@@ -130,14 +132,18 @@ class ListNode {
         void reverse_display(struct ListNode*);
         ListNode* reverse(ListNode*);
 
+        bool isempty();
         int len();
         void print();
-        ListNode() : head(nullptr) {}
+        List() : head(nullptr) {}
 
 };
 
+bool List::isempty() {
+    return head == NULL;
+}
 //method to insert element x at the start of the SLL
-void ListNode::insert_beginning(int x) {
+void List::insert_beginning(int x) {
     struct ListNode* newnode = (struct ListNode*) malloc (sizeof(struct ListNode));
     newnode -> data = x;
     newnode -> next = head;
@@ -145,7 +151,7 @@ void ListNode::insert_beginning(int x) {
 }
 
 //method to insert element x at the end of the SLL
-void ListNode::insert_end(int x) {
+void List::insert_end(int x) {
     struct ListNode* newnode = (struct ListNode*) malloc (sizeof(struct ListNode));
     newnode -> data = x;
     newnode -> next = NULL;
@@ -163,7 +169,7 @@ void ListNode::insert_end(int x) {
 }
 
 //method to insert element x at the specified position in the SLL
-void ListNode::insert_position(int x, int pos) {
+void List::insert_position(int x, int pos) {
     struct ListNode *newnode = (struct ListNode*) malloc (sizeof(struct ListNode));
     
     if (pos > len() || pos < 1) {
@@ -186,7 +192,7 @@ void ListNode::insert_position(int x, int pos) {
 }
 
 //method to delete the first element of the SLL
-int ListNode::delete_beginning() {
+int List::delete_beginning() {
     if (head == NULL) {
         printf("UnderFlow Error: List is Empty.\n");
         return 0;
@@ -200,7 +206,7 @@ int ListNode::delete_beginning() {
 }
 
 //method to delete last element of the SLL
-int ListNode::delete_end() {
+int List::delete_end() {
     if (head == NULL) {
         printf("UnderFlow Error: List is Empty.\n");
         return 0;
@@ -225,7 +231,7 @@ int ListNode::delete_end() {
 }
 
 //method to delete the element present in the specified position
-int ListNode::delete_position(int pos) {
+int List::delete_position(int pos) {
     if (head == NULL) {
         printf("\nUnderFlow Error: List is Empty.\n");
         return 0;
@@ -254,7 +260,7 @@ int ListNode::delete_position(int pos) {
 }
 
 //method to check if element x is presentin the SLL or not
-bool ListNode::search(int x) {
+bool List::search(int x) {
     struct ListNode* temp = head;
     for (int i = 0; temp -> next != NULL; temp = temp -> next){
         if (temp -> data == x) {
@@ -270,7 +276,7 @@ bool ListNode::search(int x) {
 }
 
 //method to display the reverse of the SLL
-void ListNode::reverse_display(struct ListNode* temp) {
+void List::reverse_display(struct ListNode* temp) {
     if (temp -> next == NULL) {
         printf("%d ", temp -> data);
         return;
@@ -281,7 +287,7 @@ void ListNode::reverse_display(struct ListNode* temp) {
 }
 
 //method to reverse the SLL
-ListNode* ListNode::reverse(ListNode *head) {
+List::ListNode* List::reverse(ListNode *head) {
     ListNode *curr = head, *P = NULL, *N;
 
     while (curr != NULL) {
@@ -296,7 +302,7 @@ ListNode* ListNode::reverse(ListNode *head) {
 }
 
 //method to find the number of elements in the SLL
-int ListNode::len() {
+int List::len() {
     int len = 0;
     struct ListNode* temp = head;
     for (; temp -> next != NULL; temp = temp -> next) {
@@ -307,7 +313,7 @@ int ListNode::len() {
 }
 
 //method to display the singly liked list
-void ListNode::print() {
+void List::print() {
     struct ListNode *temp = head;
     if (temp == NULL) {
         printf("head -> NULL\n");
