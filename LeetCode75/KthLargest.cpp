@@ -8,15 +8,15 @@ using namespace std;
 class Solution {
 private:
 	vector<int> nums;
-public:
-	int findKthLargest(vector<int>& arr, int k);
-
 	void HeapifyUp(int k);
 	void HeapifyDown(int k);
 	void print();
 	void Insert(int k);
 
 	int Max();
+
+public:
+	int findKthLargest(vector<int>& arr, int k);
 };
 
 void Solution::HeapifyUp(int k) {
@@ -53,12 +53,10 @@ void Solution::print() {
 }
 
 void Solution::Insert(int dat) {
-	if (nums.size() == 0) {
-		nums.push_back(dat);
-		return;
-	}
 	nums.push_back(dat);
-	HeapifyUp(nums.size() - 1);
+	if (nums.size() > 1) {
+		HeapifyUp(nums.size() - 1);
+	}
 }
 
 int Solution::Max() {
