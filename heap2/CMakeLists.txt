@@ -4,7 +4,10 @@ project(heap2)
 set(CMAKE_CXX_STANDARD 20)
 
 add_executable(heap2 main.cpp
-        MaxHeap.cpp
-        MaxHeap.h
+        MaxHeap1.cpp
+        MaxHeap1.h
         Solution.cpp
+        MaxHeap.h
+        MaxHeapFactory.cpp
+        MaxHeapFactory.h
 )

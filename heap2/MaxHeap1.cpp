@@ -4,36 +4,35 @@
 #include <stdio.h>
 #include <iostream>
 #include <algorithm>
-#include "MaxHeap.h"
+#include "MaxHeap1.h"
 
 using namespace std;
 
-MaxHeap::MaxHeap(vector<int>& arr) {
+MaxHeap1::MaxHeap1(vector<int>& arr) {
     build(arr);
 }
 
-void MaxHeap::build(vector<int> &arr) {
+void MaxHeap1::build(vector<int> &arr) {
     heap.clear();
     heap.resize(arr.size());
     for (int i : arr) insert(i);
 }
 
-void MaxHeap::insert(int dat) {
-    if (heap.size() == 0) {
-        heap.push_back(dat);
-        return;
-    }
+MaxHeap1& MaxHeap1::insert(int dat) {
     heap.push_back(dat);
-    heapifyUp(heap.size() - 1);
+    if (heap.size() > 1) {
+        heapifyUp(heap.size() - 1);
+    }
+    return *this;
 }
 
-int MaxHeap::maxK(int k) {
+int MaxHeap1::maxK(int k) {
     int max;
     while (k-- > 0) max = this->max();
     return max;
 }
 
-int MaxHeap::max() {
+int MaxHeap1::max() {
     int max = heap[0];
     if (heap.size() == 1) {
         heap.erase(heap.end() - 1);
@@ -45,18 +44,17 @@ int MaxHeap::max() {
     return max;
 }
 
-void MaxHeap::heapifyUp(int k) {
-    int parent = (k - 1) / 2;
+void MaxHeap1::heapifyUp(unsigned long k) {
+    unsigned long parent = (k - 1) / 2;
     if (heap[parent] <= heap[k]) {
         swap(heap[k], heap[parent]);
     }
-    if (parent == 0) {
-        return;
+    if (parent > 0) {
+        heapifyUp(parent);
     }
-    heapifyUp(parent);
 }
 
-void MaxHeap::heapifyDown(int k) {
+void MaxHeap1::heapifyDown(int k) {
     int largest = k, left = 2 * k + 1, right = left + 1;
 
     if (left < heap.size() && heap[left] >= heap[largest]) {
@@ -71,10 +69,11 @@ void MaxHeap::heapifyDown(int k) {
     }
 }
 
-void MaxHeap::print() {
-    for (int i = 0; i < heap.size(); i++) {
-        cout << heap[i] << " ";
+MaxHeap1& MaxHeap1::print() {
+    for (int i : heap) {
+        cout << i << " ";
     }
     cout << endl;
+    return *this;
 }
 
